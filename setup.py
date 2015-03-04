@@ -6,7 +6,7 @@ version = '1.0'
 setup(name='fhf.metrics',
       version=version,
       description="Flint Hills Frontiers project based metrics.",
-      long_description=open("README.txt").read() + "\n" +
+      long_description=open("README.md").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -28,6 +28,7 @@ setup(name='fhf.metrics',
           'setuptools',
           'plone.app.dexterity [grok]',
           'plone.namedfile [blobs]',
+          'plone.api',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
