@@ -30,13 +30,13 @@ class IMetric(form.Schema, IImageScaleTraversable):
             required = False,
             )
 
-    data = schema.NamedBlobFile(
+    data = NamedBlobFile(
             title = _(u'Data File'),
             description = _(u'Source data in CSV format.'),
             required = False,
             )
 
-    script = schema.NamedBlobFile(
+    script = NamedBlobFile(
             title = _(u'Script'),
             description = _(u'javascript for graphing the data'),
             required = False,

@@ -5,6 +5,31 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="fhf.metrics">
+
+<metal:block define-slot="style_slot">
+<metal:slot fill-slot="style_slot">
+<style media="all" type="text/css">
+  path { 
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+    }
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+    }
+</style>
+</metal:slot>
+</metal:block>
+
+<metal:slot fill-slot="javascript_head_slot">
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+</metal:slot>
+
 <body>
 
 <tal:comment tal:condition="nothing">
@@ -22,6 +47,8 @@
 
 
     <div tal:content="context/Title">Title inserted here</div>
+
+    <script src="#" tal:attributes="src string:${context/absolute_url}/@@download/script"></script>
 
   </metal:content-core>
 </metal:main>
