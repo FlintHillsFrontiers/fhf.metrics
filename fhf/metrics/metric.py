@@ -24,13 +24,23 @@ class IMetric(form.Schema, IImageScaleTraversable):
     Flint Hills Frontiers regional metrics
     """
 
-    # If you want a schema-defined interface, delete the model.load
-    # line below and delete the matching file in the models sub-directory.
-    # If you want a model-based interface, edit
-    # models/metric.xml to define the content type.
+    uri = schema.URI(
+            title = _(u'External Data Source'),
+            description = _(u'Link to external data source.'),
+            required = False,
+            )
 
-    form.model("models/metric.xml")
+    data = schema.NamedBlobFile(
+            title = _(u'Data File'),
+            description = _(u'Source data in CSV format.'),
+            required = False,
+            )
 
+    script = schema.NamedBlobFile(
+            title = _(u'Script'),
+            description = _(u'javascript for graphing the data'),
+            required = False,
+            )
 
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific
@@ -40,7 +50,6 @@ class IMetric(form.Schema, IImageScaleTraversable):
 class Metric(Container):
     grok.implements(IMetric)
 
-    # Add your class methods and properties here
 
 
 # View class
