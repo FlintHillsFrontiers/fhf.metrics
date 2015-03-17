@@ -6,25 +6,6 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="fhf.metrics">
 
-<metal:block define-slot="style_slot">
-<metal:slot fill-slot="style_slot">
-<style media="all" type="text/css">
-  path { 
-    stroke: steelblue;
-    stroke-width: 2;
-    fill: none;
-    }
-
-  .axis path,
-  .axis line {
-    fill: none;
-    stroke: grey;
-    stroke-width: 1;
-    shape-rendering: crispEdges;
-    }
-</style>
-</metal:slot>
-</metal:block>
 
 <metal:slot fill-slot="javascript_head_slot">
   <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -37,21 +18,22 @@
     content unless activated by creation of a view class with a matching name.
 </tal:comment>
 
-<metal:main fill-slot="content-core">
-  <metal:content-core define-macro="content-core">
+<metal:slot fill-slot="main">
+  <metal:main define-macro="main">
 
-    <h2>
-        Rendered from
-        metric_templates/<span tal:replace="template/id" />
-    </h2>
+    <div id="id" class="metric" tal:attributes="id context/script/filename">
 
+      <h2 class="title" tal:content="context/title">Title</h2>
 
-    <div tal:content="context/Title">Title inserted here</div>
-
-    <script src="#" tal:attributes="src string:${context/absolute_url}/@@download/script"></script>
-
-  </metal:content-core>
-</metal:main>
+      <div class="overview" tal:condition="context/overview" 
+           tal:content="structure context/overview/output">overview</div>
+  
+      <div tal:replace="structure view/css">embedded CSS</div>
+      <script src="#" tal:attributes="src string:@@download/script"></script>
+  
+    </div>
+  </metal:main>
+</metal:slot>
 
 </body>
 </html>
