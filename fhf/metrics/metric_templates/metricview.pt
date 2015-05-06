@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="fhf.metrics">
+
+<metal:slot fill-slot="style_slot">
+  <link rel="stylesheet" class="required plugin"
+    tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+    tal:attributes="href
+        string:${navroot}/++resource++fhf.metrics/dashboard.css">
+  <div tal:replace="structure view/css">CSS stuff</div>
+</metal:slot>
+
+<metal:slot fill-slot="javascript_head_slot">
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script type="text/javascript"
+    tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+    tal:attributes="href
+        string:${navroot}/++resource++fhf.metrics/tabletop.js">
+  </script>
+</metal:slot>
+
+
+<body>
+
+<tal:comment tal:condition="nothing">
+    This is a sample view template. It will not be used for rendering the
+    content unless activated by creation of a view class with a matching name.
+</tal:comment>
+
+<metal:slot fill-slot="main">
+  <metal:main define-macro="main">
+
+    <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+    <h1 class="documentFirstHeading" tal:content="context/title">Title</h1>
+
+    <div tal:replace="structure provider:plone.belowcontenttitle" />
+
+    <div tal:replace="structure provider:plone.abovecontentbody" />
+
+    <div id="id" class="metric" tal:attributes="id context/script/filename">
+
+      <div class="overview" tal:condition="context/overview" 
+           tal:content="structure context/overview/output">overview</div>
+  
+         <!-- <div tal:replace="structure view/css">embedded CSS</div> -->
+      <script src="#" tal:attributes="src string:@@download/script"></script>
+
+      <div tal:replace="structure provider:plone.belowcontentbody" />
+  
+    </div>
+  </metal:main>
+</metal:slot>
+
+</body>
+</html>
+

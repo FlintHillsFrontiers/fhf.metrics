@@ -8,5 +8,7 @@
   -->
 <object name="portal_types" meta_type="Plone Types Tool">
   <!-- -*- extra stuff goes here -*- -->
+  <object name="fhf.metrics.dashboard" meta_type="Dexterity FTI" />
+  <object name="fhf.metrics.topic" meta_type="Dexterity FTI" />
   <object name="fhf.metrics.metric" meta_type="Dexterity FTI" />
 </object>

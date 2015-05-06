@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="leam.isop">
+
+<metal:slot fill-slot="style_slot">
+  <link rel="stylesheet" class="required plugin"
+    tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+    tal:attributes="href 
+        string:${navroot}/++resource++fhf.metrics/dashboard.css">
+</metal:slot>
+
+<metal:slot fill-slot="javascript_head_slot">
+  <script type="text/javascript"  
+    tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+    tal:attributes="href 
+        string:${navroot}/++resource++fhf.metrics/tabletop.js">
+  </script>
+</metal:slot>
+
+<body>
+
+  <!-- remove title and description -->
+  <metal:slot fill-slot="main">
+    <metal:main define-macro="main">
+        <div class="row">
+  
+          <!-- navigation sidebar -->
+          <!-- removed "sidebar" class -->
+          <div class="col-sm-3 col-md-2">
+            <div tal:repeat="d view/dashboard">
+              <h4><a href="#" tal:attributes="href d/topic/getURL" 
+                  tal:content="d/topic/Title">TITLE</a></h4>
+            </div> 
+          </div>
+  
+          <!-- metric display -->
+          <div class="col-sm-9 col-md-10">
+            <div tal:repeat="m view/metrics">
+              <h4 tal:content="m/Title">METRIC TITLE</h4>
+            </div>
+          </div>
+        </div>
+    </metal:main>
+  </metal:slot>
+
+</body>
+</html>
+

@@ -1,22 +1,24 @@
 <?xml version="1.0"?>
-<object name="fhf.metrics.metric"
+<object name="fhf.metrics.topic"
    meta_type="Dexterity FTI"
    i18n:domain="fhf.metrics" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Basic metadata -->
-  <property name="title" i18n:translate="">Metric</property>
+  <property name="title" i18n:translate="">Topic</property>
   <property name="description"
-    i18n:translate="">Flint Hills Frontiers regional metrics</property>
+    i18n:translate="">Flint Hills Frontiers Metric Topic</property>
   <property name="icon_expr">string:${portal_url}/folder_icon.png</property>
-  <property name="factory">fhf.metrics.metric</property>
-  <property name="global_allow">True</property>
-  <property name="filter_content_types">False</property>
-  <property name="allowed_content_types" />
+  <property name="factory">fhf.metrics.topic</property>
+  <property name="global_allow">False</property>
+  <property name="filter_content_types">True</property>
+  <property name="allowed_content_types">
+    <element value="fhf.metrics.metric"/>
+  </property>
   <property name="allow_discussion">False</property>
 
   <!-- schema and class used for content items -->
-  <property name="schema">fhf.metrics.metric.IMetric</property>
-  <property name="klass">fhf.metrics.metric.Metric</property>
+  <property name="schema">fhf.metrics.topic.ITopic</property>
+  <property name="klass">fhf.metrics.topic.Topic</property>
 
   <property name="behaviors">
      <element value="plone.app.content.interfaces.INameFromTitle" />
@@ -25,11 +27,11 @@
 
   <!-- View information -->
   <property name="link_target"></property>
-  <property name="immediate_view">metricview</property>
-  <property name="default_view">metricview</property>
+  <property name="immediate_view">topicview</property>
+  <property name="default_view">topicview</property>
   <property name="view_methods">
    <element value="view"/>
-   <element value="metricview"/>
+   <element value="topicview"/>
   </property>
   <property name="default_view_fallback">False</property>
   <property name="add_permission">cmf.AddPortalContent</property>

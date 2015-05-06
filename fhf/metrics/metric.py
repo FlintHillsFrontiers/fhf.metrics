@@ -1,11 +1,10 @@
-from five import grok
-
-from z3c.form import group, field
 from zope import schema
 from Acquisition import aq_inner
 from zope.interface import invariant, Invalid
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from z3c.form import group, field
+from Products.Five.browser import BrowserView
 
 from plone.dexterity.content import Container
 from plone.directives import dexterity, form
@@ -43,6 +42,11 @@ class IMetric(form.Schema, IImageScaleTraversable):
             required = False,
             )
 
+    footer = RichText(
+            title = _(u'Footer'),
+            description = _(u'source, related items, etc'),
+            required = False,
+            )
 
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific
@@ -50,26 +54,14 @@ class IMetric(form.Schema, IImageScaleTraversable):
 # in separate view classes.
 
 class Metric(Container):
-    grok.implements(IMetric)
+    pass
 
 
 # View class
 # The view will automatically use a similarly named template in
 # metric_templates.
-# Template filenames should be all lower case.
-# The view will render when you request a content object with this
-# interface with "/@@sampleview" appended.
-# You may make this the default view for content objects
-# of this type by uncommenting the grok.name line below or by
-# changing the view class name and template filename to View / view.pt.
-
-class SampleView(grok.View):
+class MetricView(BrowserView):
     """ sample view class """
-
-    grok.context(IMetric)
-    grok.require('zope2.View')
-
-    # grok.name('view')
 
     # Add view methods here
     def css(self):
@@ -79,7 +71,7 @@ class SampleView(grok.View):
         links = []
         for l in context.listFolderContents():
             if l.id.endswith('.css'):
-                links.append('<link rel="stylesheet" href="%s">' \
-                             % l.absolute_url())
+                links.append('<link rel="stylesheet" class="required plugin" '
+                        'href="%s/@@download/file">' % l.absolute_url())
         return '\n'.join(links)
 
