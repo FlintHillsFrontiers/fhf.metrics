@@ -52,6 +52,13 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      name="metric"
+      for=".topic.ITopic"
+      class=".topic.ResourceView"
+      permission="zope2.View"
+      />
+
   <class class=".metric.Metric">
       <implements interface=".metric.IMetric" />
   </class>
@@ -61,6 +68,14 @@
       for=".metric.IMetric"
       class=".metric.MetricView"
       template="metric_templates/metricview.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="embedded"
+      for=".metric.IMetric"
+      class=".metric.EmbeddedView"
+      template="metric_templates/embeddedview.pt"
       permission="zope2.View"
       />
 

@@ -54,20 +54,11 @@ class IMetric(form.Schema, IImageScaleTraversable):
 # in separate view classes.
 
 class Metric(Container):
-    pass
 
-
-# View class
-# The view will automatically use a similarly named template in
-# metric_templates.
-class MetricView(BrowserView):
-    """ sample view class """
-
-    # Add view methods here
     def css(self):
         """return all contained CSS files as a set of link tags"""
 
-        context = aq_inner(self.context)
+        context = aq_inner(self)
         links = []
         for l in context.listFolderContents():
             if l.id.endswith('.css'):
@@ -75,3 +66,16 @@ class MetricView(BrowserView):
                         'href="%s/@@download/file">' % l.absolute_url())
         return '\n'.join(links)
 
+
+class EmbeddedView(BrowserView):
+    """ a simple template to embed multiple metrics on a page """
+    pass
+
+
+# View class
+# The view will automatically use a similarly named template in
+# metric_templates.
+class MetricView(BrowserView):
+    """ default view class """
+
+    # Add view methods here

@@ -9,9 +9,8 @@
 <metal:slot fill-slot="style_slot">
   <link rel="stylesheet" class="required plugin"
     tal:define="navroot context/@@plone_portal_state/navigation_root_url"
-    tal:attributes="href
-        string:${navroot}/++resource++fhf.metrics/dashboard.css">
-  <div tal:replace="structure view/css">CSS stuff</div>
+    tal:attributes="href string:${navroot}/++resource++fhf.metrics/dashboard.css">
+  <div tal:replace="structure context/css">CSS stuff</div>
 </metal:slot>
 
 <metal:slot fill-slot="javascript_head_slot">
@@ -42,17 +41,18 @@
 
     <div tal:replace="structure provider:plone.abovecontentbody" />
 
-    <div id="id" class="metric" tal:attributes="id context/script/filename">
+    <div class="overview" tal:condition="context/overview" 
+        tal:content="structure context/overview/output">overview</div>
 
-      <div class="overview" tal:condition="context/overview" 
-           tal:content="structure context/overview/output">overview</div>
+    <div id="id" class="metric" tal:attributes="id context/id"/>
+
+    <div class="overview" tal:condition="context/footer" 
+        tal:content="structure context/footer/output">footer</div>
   
-         <!-- <div tal:replace="structure view/css">embedded CSS</div> -->
-      <script src="#" tal:attributes="src string:@@download/script"></script>
+    <script src="#" tal:attributes="src string:@@download/script"></script>
 
       <div tal:replace="structure provider:plone.belowcontentbody" />
   
-    </div>
   </metal:main>
 </metal:slot>
 
