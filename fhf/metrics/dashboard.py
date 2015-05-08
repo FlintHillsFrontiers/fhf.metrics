@@ -8,11 +8,11 @@ from plone.dexterity.content import Container
 
 from fhf.metrics import MessageFactory as _
 
-from fhf.metrics.topic import ITopic
-from fhf.metrics.metric import IMetric
+import topic, metric
 
 class IDashboard(Interface):
     """marker interface for dashboard view"""
+
 
 class Dashboard(Container):
     """A folder-type that contains topics which contain metrics"""
@@ -28,13 +28,13 @@ class Dashboard(Container):
         catalog = getToolByName(context, 'portal_catalog')
 
         path = '/'.join(context.getPhysicalPath())
-        topics = catalog(object_provides=ITopic.__identifier__, 
+        topics = catalog(object_provides=topic.ITopic.__identifier__, 
                 path={'query': path, 'depth':1},
                 sort_on='getObjPositionInParent')
 
         results = []
         for t in topics:
-            metrics = catalog(object_provides=IMetric.__identifier__,
+            metrics = catalog(object_provides=metric.IMetric.__identifier__,
                     path={'query': '/'.join(t.getPhysicalPath()), 'depth': 1},
                     sort_on='getObjPositionInParent')
             results.append({'topic': t, 'metrics': metrics})
@@ -46,23 +46,22 @@ class DashboardView(BrowserView):
     """a dashboard that presents links to all metrics in the folder"""
 
     def topics(self):
-        #import pdb; pdb.set_trace()
+
         catalog = getToolByName(self.context, 'portal_catalog')
         path = '/'.join(self.context.getPhysicalPath())
-        return catalog(object_provides=ITopic.__identifier__, 
+        return catalog(object_provides=topic.ITopic.__identifier__, 
                 path={'query': path, 'depth':1},
                 sort_on='getObjPositionInParent')
 
+
     def metrics(self):
-        import pdb; pdb.set_trace()
 
         results = []
         for t in self.topics():
-            metrics = catalog(object_provides=IMetric.__identifier__,
+            metrics = catalog(object_provides=metric.IMetric.__identifier__,
                     path={'query': '/'.join(t.getPhysicalPath()), 'depth': 1},
                     sort_on='getObjPositionInParent')
             results.append({'topic': t, 'metrics': metrics})
             
         return results
-
 

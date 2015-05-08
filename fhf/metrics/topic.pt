@@ -17,7 +17,7 @@
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script type="text/javascript"  
     tal:define="navroot context/@@plone_portal_state/navigation_root_url"
-    tal:attributes="href 
+    tal:attributes="src 
         string:${navroot}/++resource++fhf.metrics/tabletop.js">
   </script>
 </metal:slot>
@@ -31,10 +31,9 @@
   
           <!-- navigation sidebar -->
           <!-- removed "sidebar" class -->
-          <div class="col-sm-3 col-md-2">
-            <div tal:repeat="d view/dashboard">
-              <h4><a href="#" tal:attributes="href d/topic/getURL" 
-                  tal:content="d/topic/Title">TITLE</a></h4>
+          <div class="col-sm-3 col-md-2" tal:define="db view/dashboard;">
+            <div tal:replace="structure db/@@listing">
+              Topic Listing Goes Here
             </div> 
           </div>
   

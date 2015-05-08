@@ -16,6 +16,8 @@ from plone.namedfile.interfaces import IImageScaleTraversable
 
 from fhf.metrics import MessageFactory as _
 
+import dashboard
+
 
 # Interface class; used to define content-type schema.
 
@@ -42,8 +44,8 @@ class IMetric(form.Schema, IImageScaleTraversable):
             required = False,
             )
 
-    footer = RichText(
-            title = _(u'Footer'),
+    attribution = RichText(
+            title = _(u'Attribution'),
             description = _(u'source, related items, etc'),
             required = False,
             )
@@ -54,6 +56,22 @@ class IMetric(form.Schema, IImageScaleTraversable):
 # in separate view classes.
 
 class Metric(Container):
+
+
+    def dashboard(self):
+
+        obj = aq_inner(self)
+        while obj is not None:
+            if dashboard.IDashboard.providedBy(obj):
+                break
+            else:
+                obj = getattr(obj, 'aq_parent', None)
+
+        if not obj:
+            raise RuntimeError('Unable to locate Dashboard container')
+        else:
+            return obj
+
 
     def css(self):
         """return all contained CSS files as a set of link tags"""
@@ -70,6 +88,15 @@ class Metric(Container):
 class EmbeddedView(BrowserView):
     """ a simple template to embed multiple metrics on a page """
     pass
+
+
+class ScriptView(BrowserView):
+    """ utility view to return script with proper mime-type """
+    def __call__(self):
+        context = aq_inner(self.context)
+        self.request.response.setHeader('content-type', 
+                'application/javascript')
+        return context.script._getData()
 
 
 # View class

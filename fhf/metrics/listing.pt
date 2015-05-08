@@ -1,0 +1,4 @@
+<div class="metric-dashboard" tal:repeat="c context/contents">
+  <h4><a href="#" tal:attributes="href c/topic/getURL" 
+      tal:content="c/topic/Title">TITLE</a></h4>
+</div>

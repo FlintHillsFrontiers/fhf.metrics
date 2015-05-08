@@ -31,10 +31,9 @@
           <!-- navigation sidebar -->
           <!-- removed "sidebar" class -->
           <div class="col-sm-3 col-md-2">
-            <div tal:repeat="c context/contents">
-              <h4><a href="#" tal:attributes="href c/topic/getURL" 
-                  tal:content="c/topic/Title">TITLE</a></h4>
-            </div> 
+            <div tal:replace="structure context/@@listing">
+              Metric Navigation Goes Here
+            </div>
           </div>
   
           <!-- metric display -->

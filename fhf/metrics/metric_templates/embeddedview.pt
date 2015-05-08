@@ -6,10 +6,10 @@
 
   <div id="id" class="metric" tal:attributes="id context/id"/>
 
-  <div class="overview" tal:condition="context/footer" 
-      tal:content="structure context/footer/output">footer</div>
+  <div class="overview" tal:condition="context/attribution" 
+      tal:content="structure context/attribution/output">attribution</div>
   
   <script src="#" 
-    tal:attributes="src string:${context/absolute_url}/@@download/script">
+    tal:attributes="src string:${context/absolute_url}/@@script">
   </script>
 

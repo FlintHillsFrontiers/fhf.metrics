@@ -7,8 +7,8 @@ from Products.Five import BrowserView
 
 from fhf.metrics import MessageFactory as _
 
-from fhf.metrics.metric import IMetric
-from fhf.metrics.dashboard import IDashboard
+import dashboard
+import metric
 
 class ITopic(Interface):
     """marker interface for dashboard view"""
@@ -24,10 +24,17 @@ class TopicView(BrowserView):
 
     def dashboard(self):
 
-        # seems hardcoded but plone container content restrictions 
-        # should enforce correctness to always return a dashboard
-        dashboard = aq_parent(aq_inner(self.context))
-        return dashboard.contents()
+        obj = aq_inner(self.context)
+        while obj is not None:
+            if dashboard.IDashboard.providedBy(obj):
+                break
+            else:
+                obj = getattr(obj, 'aq_parent', None)
+
+        if not obj:
+            raise RuntimeError('Unable to locate Dashboard container')
+        else:
+            return obj
 
 
     def metrics(self):
@@ -35,18 +42,9 @@ class TopicView(BrowserView):
 
         catalog = getToolByName(self.context, 'portal_catalog')
         path = '/'.join(self.context.getPhysicalPath())
-        results = catalog(object_provides=IMetric.__identifier__,
+        results = catalog(object_provides=metric.IMetric.__identifier__,
                 path={'query': path, 'depth':1},
                 sort_on='getObjPositionInParent')
 
         return [b.getObject() for b in results]
-
-
-
-class ResourceView(BrowserView):
-    """a dashboard that presents links to all metrics in the folder"""
-
-    def __call__(self):
-        import pdb; pdb.set_trace()
-        print "in resource view"
 
