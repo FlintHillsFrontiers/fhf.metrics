@@ -103,3 +103,53 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+/*
+ * Common Metric Styles
+ */
+
+.axis text {
+  font: 10px sans-serif;
+ 
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+ display: none;
+}
+
+.y.axis line{
+    stroke: #e7e7e7;
+}
+
+#tooltip {
+        position: relative;
+        z-index: 1;
+        width: 200px;
+        height: auto;
+        padding: 10px;
+        background:rgba(255,255,255, 0.85);
+        
+        
+        -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        pointer-events: none;
+}
+
+#tooltip.hidden {
+        display: none;
+}
+
+#tooltip p {
+        margin: 0;
+        font-family: sans-serif;
+        font-size: 12px;
+        
+}
