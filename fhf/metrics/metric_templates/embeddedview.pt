@@ -8,8 +8,13 @@
 
   <div class="overview" tal:condition="context/attribution" 
       tal:content="structure context/attribution/output">attribution</div>
+
+  <div class="metric-script" 
+      tal:content="string:${context/absolute_url}">embedded URL</div>
   
+  <!--
   <script src="#" 
     tal:attributes="src string:${context/absolute_url}/@@script">
   </script>
+  -->
 

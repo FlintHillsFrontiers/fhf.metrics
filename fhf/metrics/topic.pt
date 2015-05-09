@@ -20,6 +20,11 @@
     tal:attributes="src 
         string:${navroot}/++resource++fhf.metrics/tabletop.js">
   </script>
+  <script type="text/javascript"  
+    tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+    tal:attributes="src 
+        string:${navroot}/++resource++fhf.metrics/metric_loader.js">
+  </script>
 </metal:slot>
 
 <body>

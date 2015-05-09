@@ -92,11 +92,14 @@ class EmbeddedView(BrowserView):
 
 class ScriptView(BrowserView):
     """ utility view to return script with proper mime-type """
+
     def __call__(self):
         context = aq_inner(self.context)
+        init = "\nmetric_init('%s', '%s', '%s');\n" % (context.id,
+                context.uri, context.absolute_url())
         self.request.response.setHeader('content-type', 
                 'application/javascript')
-        return context.script._getData()
+        return context.script._getData() + init
 
 
 # View class
