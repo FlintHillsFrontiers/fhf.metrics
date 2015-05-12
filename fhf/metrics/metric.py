@@ -26,6 +26,12 @@ class IMetric(form.Schema, IImageScaleTraversable):
     Flint Hills Frontiers regional metrics
     """
 
+    icon_class = schema.TextLine(
+            title = _(u'Title Icon'),
+            description = _(u'provide a class name for font awesome icon'),
+            required = False,
+            )
+
     overview = RichText(
             title = _(u'Overview'),
             description = _(u'overview of the metric'),
@@ -38,17 +44,19 @@ class IMetric(form.Schema, IImageScaleTraversable):
             required = True,
             )
 
+    attribution = RichText(
+            title = _(u'Attribution'),
+            description = _(u'source, related items, etc'),
+            required = False,
+            )
+
     uri = schema.URI(
             title = _(u'External Data Source'),
             description = _(u'Link to external data source.'),
             required = False,
             )
 
-    attribution = RichText(
-            title = _(u'Attribution'),
-            description = _(u'source, related items, etc'),
-            required = False,
-            )
+
 
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific

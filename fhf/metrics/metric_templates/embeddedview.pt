@@ -1,5 +1,8 @@
 
-  <h2 class="documentFirstHeading" tal:content="context/title">Title</h2>
+  <h2 class="documentFirstHeading">
+    <i tal:attributes="class context/icon_class"></i>
+    <span tal:content="context/title">Title</span>
+  </h2>
 
   <div class="overview" tal:condition="context/overview" 
       tal:content="structure context/overview/output">overview</div>
