@@ -31,25 +31,25 @@
 
   <metal:slot fill-slot="main">
     <metal:main define-macro="main">
-  
-      <div class="row">
-  
-        <!-- navigation sidebar -->
-        <!-- removed "sidebar" class -->
-        <div class="col-sm-3 col-md-2" tal:define="db context/dashboard;">
-          <div tal:replace="structure db/@@listing">
-            Metric Navigation Goes Here
+      <div class="container">
+        <div class="row">
+    
+          <!-- navigation sidebar -->
+          <!-- removed "sidebar" class -->
+          <div class="col-sm-3 col-md-2" tal:define="db context/dashboard;">
+            <div tal:replace="structure db/@@listing">
+              Metric Navigation Goes Here
+            </div>
+          </div>
+    
+          <!-- metric display -->
+          <div class="col-sm-9 col-md-10">
+            <div tal:replace="structure context/@@embedded">
+              Metric Visualization
+            </div>
           </div>
         </div>
-  
-        <!-- metric display -->
-        <div class="col-sm-9 col-md-10">
-          <div tal:replace="structure context/@@embedded">
-            Metric Visualization
-          </div>
-        </div>
-      </div>
-  
+      </div> <!-- container --> 
     </metal:main>
   </metal:slot>
   

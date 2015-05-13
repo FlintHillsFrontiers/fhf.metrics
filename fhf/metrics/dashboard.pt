@@ -26,6 +26,7 @@
   <!-- remove title and description -->
   <metal:slot fill-slot="main">
     <metal:main define-macro="main">
+      <div class="container">
         <div class="row">
   
           <!-- navigation sidebar -->
@@ -41,6 +42,7 @@
             METRIC LISTING
           </div>
         </div>
+      </div> <!-- container -->
     </metal:main>
   </metal:slot>
 
