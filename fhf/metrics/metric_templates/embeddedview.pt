@@ -1,21 +1,21 @@
 
 <div class="metric">
-  <h2 class="title">
+  <h3 class="title">
     <i tal:attributes="class context/icon_class"></i>
     <span tal:content="context/title">Title</span>
-  </h2>
+  </h3>
 
-  <div class="overview" tal:condition="context/overview" 
+  <div class="overview" tal:condition="context/overview"
     tal:content="structure context/overview/output">overview</div>
 
-  <div id="##" class="slot" tal:attributes="id context/id">SLOT</div>
+  <div id="##" class="slot" tal:attributes="id context/id"></div>
 
-  <div class="attribution" tal:condition="context/attribution" 
+  <div class="attribution" tal:condition="context/attribution"
     tal:content="structure context/attribution/output">attribution</div>
 
   <div class="edit-link" tal:condition="context/modifiable">
-    Edit Source Data: <a href="#" tal:attributes="href context/source"
-      tal:content="context/source">google sheet</a>
+    <a class="btn btn-default btn-xs" href="#" tal:attributes="href context/source"
+      tal:content="context/source"><i class="fa fa-eye"></i>&nbsp;&nbsp; View Data</a>
   </div>
 
   <div class="metric-script" style="display: none;"
