@@ -37,14 +37,15 @@
   
           <!-- navigation sidebar -->
           <!-- removed "sidebar" class -->
-          <div class="col-sm-3 col-md-2" tal:define="db view/dashboard;">
+          <div class="col-sm-3 col-md-2 sidebar" 
+            tal:define="db view/dashboard;">
             <div tal:replace="structure db/@@listing">
               Topic Listing Goes Here
             </div> 
           </div>
   
           <!-- metric display -->
-          <div class="col-sm-9 col-md-10">
+          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div tal:repeat="m view/metrics">
               <div tal:content="structure m/@@embedded">
                 Metric Goes Here
